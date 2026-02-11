@@ -1,0 +1,24 @@
+# SSH Keys Directory
+
+This directory stores the generated SSH key pairs for accessing EC2 instances.
+
+**Security Notice:** Key files in this directory should NOT be committed to version control.
+
+Files in this directory:
+- `hapi-loadtest-*.pem` - Private key for accessing HAPI FHIR EC2 instances
+
+## Usage
+
+After deploying the HapiStack, the private key will be automatically downloaded here.
+
+To SSH into the HAPI instance:
+```bash
+ssh -i infra/keys/hapi-loadtest-<id>.pem ec2-user@<public-ip>
+```
+
+## Cleanup
+
+Key files are automatically deleted when running the destroy script:
+```bash
+./infra/scripts/destroy-hapi.sh
+```

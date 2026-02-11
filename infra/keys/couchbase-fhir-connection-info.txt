@@ -1,0 +1,36 @@
+====================================
+Couchbase + FHIR VM Stack Connection Info
+====================================
+
+STACK: CouchbaseFhirVMStack
+KEY PAIR: couchbase-fhir-loadtest-key
+KEY LOCATION: /home/medblocks/shobhan/load-tests/infra/scripts/../keys/couchbase-fhir-loadtest-key.pem
+
+INSTANCE IPs:
+- Couchbase: 10.0.0.177 (private)
+- FHIR Server: 10.0.0.233 (private), 13.201.92.251 (public)
+- Locust: null (public)
+
+FHIR URLS:
+- Frontend: http://13.201.92.251
+- Backend (public): http://13.201.92.251:8080/
+- Metadata (public): http://13.201.92.251:8080/fhir/metadata
+- Backend (private - use for load tests): http://10.0.0.233:8080/
+
+COUCHBASE:
+- Console (private): http://10.0.0.177:8091/
+
+LOCUST WEB UI:
+- URL: null
+
+SSH COMMANDS:
+- Locust: ssh -i infra/keys/couchbase-fhir-loadtest-key.pem ec2-user@null
+- FHIR Server: ssh -i infra/keys/couchbase-fhir-loadtest-key.pem ec2-user@13.201.92.251
+
+TARGET HOST FOR LOCUST (private backend):
+export TARGET_HOST=http://10.0.0.233:8080/
+
+CLOUDWATCH LOGS (names):
+
+
+====================================

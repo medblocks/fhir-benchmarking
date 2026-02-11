@@ -1,0 +1,22 @@
+{
+  "CouchbaseFhirVMStack": {
+    "KeyPairName": "couchbase-fhir-loadtest-key",
+    "FhirServerLogGroupOutput": "/aws/ec2/fhir-server-couchbase-stack",
+    "FhirServerInstanceId": "i-07c39152757a3c0a1",
+    "FhirServerPublicIP": "13.201.92.251",
+    "FhirServerSSHCommand": "ssh -i infra/keys/couchbase-fhir-loadtest-key.pem ec2-user@13.201.92.251",
+    "ArchitectureInfo": "Couchbase FHIR CE v0.9.201 | Frontend (React) on port 80 | Backend (Spring Boot) on port 8080 | Nginx proxies /api/* and /fhir/* to backend",
+    "CouchbasePrivateIP": "10.0.0.177",
+    "SSHKeyPairId": "key-097fa874763c608fd",
+    "CouchbaseSSHCommand": "ssh -i infra/keys/couchbase-fhir-loadtest-key.pem ec2-user@13.234.111.178",
+    "CouchbaseConsoleURL": "http://13.234.111.178:8091/",
+    "FhirBackendURL": "http://13.201.92.251:8080/",
+    "FhirFrontendURL": "http://13.201.92.251",
+    "FhirServerPrivateIP": "10.0.0.233",
+    "CouchbasePublicIP": "13.234.111.178",
+    "CouchbaseLogGroupOutput": "/aws/ec2/couchbase-stack",
+    "FhirMetadataURL": "http://13.201.92.251:8080/fhir/metadata",
+    "FhirServerPrivateURL": "http://10.0.0.233:8080/",
+    "CouchbaseInstanceId": "i-0cb4839a885cccb27"
+  }
+}
