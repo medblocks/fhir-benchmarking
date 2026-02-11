@@ -251,7 +251,32 @@ For healthcheck and pagination, swap `-f` to `healthcheck.py` or `pagination.py`
 
 ---
 
-## Additional scripts
+## 6. OpenTelemetry Metrics with Grafana
+
+Both HAPI FHIR and Couchbase FHIR servers are instrumented with **OpenTelemetry** for observability. You can visualize metrics, traces, and logs using Grafana.
+
+### HAPI FHIR
+
+The HAPI FHIR EC2 instance is configured with the OpenTelemetry Java agent. Metrics are exported and can be collected by any OTEL-compatible backend (e.g., Prometheus, Jaeger, or Grafana Cloud).
+
+### Couchbase FHIR
+
+The Couchbase FHIR server also includes OpenTelemetry instrumentation. The Java agent is downloaded during instance setup and can be configured to export telemetry data.
+
+### Viewing in Grafana
+
+1. Set up a Grafana instance (local, Grafana Cloud, or self-hosted)
+2. Configure an OTEL collector to receive metrics from the FHIR servers
+3. Add Prometheus or OTEL data sources in Grafana
+4. Import or create dashboards to visualize:
+   - Request latency and throughput
+   - JVM metrics (heap, GC, threads)
+   - Database connection pool stats
+   - Error rates and HTTP status codes
+
+---
+
+## Additional Scripts
 
 | Script | Purpose |
 |--------|---------|
