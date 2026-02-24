@@ -34,7 +34,7 @@ else
   read -p "Do you need bearer token authentication? (y/n): " -n 1 -r
   echo ""
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    read -s -p "Enter your bearer token: " FHIR_AUTH_TOKEN
+    read -p "Enter your bearer token: " FHIR_AUTH_TOKEN
     echo ""  # New line after hidden input
     if [ -n "$FHIR_AUTH_TOKEN" ]; then
       echo "✓ Bearer token set"

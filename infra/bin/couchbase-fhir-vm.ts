@@ -772,7 +772,7 @@ Environment="OTEL_JAVAAGENT_DEBUG=false"
 ExecStart=/usr/lib/jvm/java-21-amazon-corretto/bin/java \\
     -javaagent:/home/ec2-user/couchbase-fhir-ce/backend/opentelemetry-javaagent.jar \\
     -Xms4096m \\
-    -Xmx5632m \\
+    -Xmx6432m \\
     -Xss512k \\
     -XX:MaxDirectMemorySize=256m \\
     -XX:+UseG1GC \\

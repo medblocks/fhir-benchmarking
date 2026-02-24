@@ -552,15 +552,12 @@ echo "Creating log files..."
 touch /var/log/hapi-fhir.log
 touch /var/log/hapi-build.log
 touch /var/log/hapi-health.log
-touch /var/log/hapi-gc.log
 chown hapi:hapi /var/log/hapi-fhir.log
 chown hapi:hapi /var/log/hapi-build.log
 chown hapi:hapi /var/log/hapi-health.log
-chown hapi:hapi /var/log/hapi-gc.log
 chmod 644 /var/log/hapi-fhir.log
 chmod 644 /var/log/hapi-build.log
 chmod 644 /var/log/hapi-health.log
-chmod 644 /var/log/hapi-gc.log
 
 # Configure CloudWatch Agent
 # Get instance ID using IMDSv2 (required for Amazon Linux 2023)
@@ -744,6 +741,18 @@ echo "Maven build completed at $(date)" | tee -a /var/log/hapi-build.log
 # Copy the built WAR (which is executable) to /opt/hapi
 echo "Installing HAPI FHIR..."
 cp target/ROOT.war /opt/hapi/hapi-fhir-jpaserver.jar
+
+# Set ownership
+chown -R hapi:hapi /opt/hapi
+
+# Download OpenTelemetry Java agent
+echo "Downloading OpenTelemetry Java agent..."
+cd /opt/hapi
+wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+chown hapi:hapi /opt/hapi/opentelemetry-javaagent.jar
+
+# Create logs directory for GC logs (hapi user needs write access for log rotation)
+mkdir -p /opt/hapi/logs
 chown -R hapi:hapi /opt/hapi
 
 # Cleanup build directory
@@ -793,7 +802,7 @@ ExecStart=/usr/bin/java \\\\
     -javaagent:/opt/hapi/opentelemetry-javaagent.jar \\\\
     -Xms4096m \\\\
     -XX:MaxRAMPercentage=85.0 \\\\
-    -Xlog:gc*:file=/var/log/hapi-gc.log:time,uptime:filecount=5,filesize=100m \\\\
+    -Xlog:gc*:file=/opt/hapi/logs/hapi-gc.log:time,uptime:filecount=5,filesize=100m \\\\
     -Dspring.jpa.properties.hibernate.dialect=ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect \\\\
     -Dhapi.fhir.server_address=http://0.0.0.0:8080/fhir \\\\
     -Dhapi.fhir.pretty_print=false \\\\
